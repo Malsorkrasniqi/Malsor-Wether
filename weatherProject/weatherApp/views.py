@@ -8,7 +8,7 @@ def index(request):
     if request.method == 'POST':    
         try:
             city = request.POST['city'] 
-
+            
             source = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q='+
                                          city.replace(" ", "%20")+'&units=metric&appid=9235bd39b8748d9dc00cae108684f34b')
             
@@ -26,13 +26,10 @@ def index(request):
                 
             }
 
-            # Extract the country code from the API response
             country_code = str(list_of_data['sys']['country'])
 
-            # Use pycountry to get the country name from the country code
             country_name = pycountry.countries.get(alpha_2=country_code).name
 
-            # Add the country name to the data dictionary
             data["country_name"] = country_name
 
             print(data)
