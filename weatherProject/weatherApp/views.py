@@ -1,11 +1,14 @@
 import urllib.request
 import json
 from django.shortcuts import render
+import pycountry 
 
+import country_converter as coco    
 
 def index(request):
     if request.method == 'POST':
         
+
          
         try:
             city = request.POST['city']
@@ -24,11 +27,27 @@ def index(request):
                 'main': str(list_of_data['weather'][0]['main']),
                 'description': str(list_of_data['weather'][0]['description']),
                 'icon': list_of_data['weather'][0]['icon'],
-
             }
-            print(data)
-            return render(request, "main/index.html", data)
-        except:
-            data = {"error_message": "error_message"}
+            
+            country_code = str(list_of_data['sys']['country'])
+            country_name = coco.convert(names=country_code, to='name_short' )  
+            data['country_name'] = country_name
 
-    return render(request, "main/index.html")
+
+            
+            
+            
+            
+            #country_code = str(list_of_data['sys']['country'])
+            #country_name = pycountry.countries.get(alpha_2=country_code).name
+            #data ["country_name"] = country_name 
+            
+       
+
+            
+            print(data)
+            return render(request, "main/index.html", data) 
+        except:
+            return render(request, "main/index.html"    )
+
+    return render(request, "main/home.html")

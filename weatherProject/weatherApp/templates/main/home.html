@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/cerulean/bootstrap.min.css"
+    integrity="sha512-dQLT/B7byn2LjN/DN4zeBKpwGV6qbidV0XiMRWQOL7TGrV7FkZFldkGG+DGMU+CQnMTcRZlUI7GMWt1j6akNew=="
+    crossorigin="anonymous" />
+  <title>Weather</title>
+</head>
+
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+    <form method="post" class="col-md">
+      {% csrf_token %} 
+      <div class="input-group">
+        <a class="navbar-brand text-primary font-weight-bold" href="">Weather App </a>
+        <input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+  </nav>
+  
+  <div class="row">
+   
+
+  </div>
+</body>
+
+
+
+<div class="jumbotron ">
+  <h1 class="display-3">Welcome to OpenWeatherMap Weather Web!</h1>
+  <p class="lead">Discover the power of weather data from OpenWeatherMap right at your fingertips. Enter your city's name in the search bar and click "Search " to access the latest weather information.
+
+    Stay informed about the current temperature, wind speed, humidity, atmospheric pressure, and more. Whether you're planning an outdoor adventure or simply want to stay prepared, our real-time weather updates will keep you in the know.
+    
+    Explore the weather conditions of your favorite places and make the most of every day. Enjoy your weather journey with OpenWeatherMap Weather Web!</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="https://openweathermap.org/" role="button">Learn more </a> 
+  </p>
+</div>
+  </html>

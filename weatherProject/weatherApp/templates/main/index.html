@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/cerulean/bootstrap.min.css"
-    integrity="sha512-dQLT/B7byn2LjN/DN4zeBKpwGV6qbidV0XiMRWQOL7TGrV7FkZFldkGG+DGMU+CQnMTcRZlUI7GMWt1j6akNew=="
-    crossorigin="anonymous" />
-  <title>Weather</title>
-</head>
-
+  <html lang="en">
   
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <form method="post" class="col-md">
-      {% csrf_token %} 
-      <div class="input-group">
-        <input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
-        <div class="input-group-btn">
-          <button type="submit" class="btn btn-primary">Search</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/cerulean/bootstrap.min.css"
+      integrity="sha512-dQLT/B7byn2LjN/DN4zeBKpwGV6qbidV0XiMRWQOL7TGrV7FkZFldkGG+DGMU+CQnMTcRZlUI7GMWt1j6akNew=="
+      crossorigin="anonymous" />
+    <title>Weather</title>
+  </head>
+  
+    
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <form method="post" class="col-md">
+        
+        {% csrf_token %} 
+        <div class="input-group">
+          <a class="navbar-brand text-primary font-weight-bold" href="">Weather App </a>
+          <input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-primary  ">Search</button>
+          </div>
+        </div>
+      </form>
+    </nav>
+    <br> <br>
+    <div class="row">
+  
+      {% if  country_code     and temp and wind and main %}
+      <div class="col d-flex justify-content-center">
+        <div class="card text-dark bg-light mb-6">
+          <div class="card-body">
+            <h4><span class="badge badge-primary">Country name:</span> {{ country_name }}</h4>
+  
+            <h4><span class="badge badge-primary">Country Code:</span> {{ country_code }}</h4>
+            <h4><span class="badge badge-primary">Temperature in Celsius:</span> {{ temp }}</h4>
+            <h4><span class="badge badge-primary">Pressure:</span> {{ pressure }} </h4>
+            <h4><span class="badge badge-primary">windspeed:</span> {{ wind }}</h4>
+            <h4><span class="badge badge-primary">Humidity:</span> {{ humidity }}</h4>
+            <h4><span class="badge badge-primary">Forecast:</span> {{ main }} <img
+                src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Image" style="width:70px"></h4>
+            <h4><span class="badge badge-primary">Description:</span> {{ description }}</h4>
+          </div>
         </div>
       </div>
-    </form>
-  </nav>
-  <br> <br>
-  <div class="row">
-
-    {% if  country_code  and temp  %}
-    <div class="col d-flex justify-content-center">
-      <div class="card text-dark bg-light mb-6">
-        <div class="card-body">
-          <h4><span class="badge badge-primary">Country Code:</span> {{ country_code }}</h4>
-          <h4><span class="badge badge-primary">Name of City:</span> {{ city_name }}</h4>
-          <h4><span class="badge badge-primary">Temperature in Celsius:</span> {{ temp }}</h4>
-          <h4><span class="badge badge-primary">Pressure:</span> {{ pressure }} </h4>
-          <h4><span class="badge badge-primary">Windspeed:</span> {{ wind }}</h4>
-          <h4><span class="badge badge-primary">Humidity:</span> {{ humidity }}</h4>
-          <h4><span class="badge badge-primary">Forecast:</span> {{ main }} <img
-              src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Image" style="width:70px"></h4>
-          <h4><span class="badge badge-primary">Description:</span> {{ description }}</h4>
+      {% else %}
+      
+      <div class="col d-flex justify-content-center">
+          <div class="alert alert-dismissible alert-warning">
+            <h4 class="alert_heading"><span >Please enter your correct city</span></h4> 
+  
+            <p class="mb-0">Retype the previously requested location </p>
+          </div>            
         </div>
       </div>
+  
+      {% endif %}
     </div>
-    {% else %}
-    <div class="col d-flex justify-content-center">
-      <div class="card text-dark bg-light mb-6">
-        <div class="card-body">
-          
-          <h4><span >Provo perseri</span>{{ error_message }}</h4>
-        </div>
-      </div>
-    </div>
-
-    {% endif %}
-  </div>
-</body>
-
-</html>
+  </body>
+  
+  </html>
+  
+  
